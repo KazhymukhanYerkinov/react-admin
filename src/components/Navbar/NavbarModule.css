@@ -1,0 +1,13 @@
+.active{
+    color: white !important ;
+}
+
+.nav-link{
+    color: black;
+    width: 160px;
+    text-align: center;
+}
+.bottom-nav{
+    height: 42px;
+    background-color: #E7EEF8;  
+}

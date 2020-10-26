@@ -1,0 +1,42 @@
+.app-staff-table-th {
+    border-left: 1px solid #7E98AE;
+
+}
+.app-staff-table-tr {
+   position: sticky;
+    
+}
+.fa , .material-icons {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 2%;
+    font-size: 19px;
+    color: #7E98AE;
+}
+.app-staff-delete {
+    color: #D42D11;
+}
+.table{
+    border: 1px solid  #7E98AE;
+    min-width: 100%;
+}
+.app-staff {
+    font-family: SFUIDisplay;
+    font-size: 14px;
+    margin: 2% 2% 0 2%; 
+    overflow-y: auto;
+    height: 65vh;
+    min-width: 98%;
+    border: 1px solid  #7E98AE;
+}
+.app-staff thead th {
+    position: sticky;
+    top: -0.5px;
+    
+}
+th {
+    background-color: white;
+}
+
+
+
