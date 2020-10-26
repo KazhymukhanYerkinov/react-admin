@@ -30,7 +30,7 @@ let initialState = {
 
     currentPage: 1,
     count: 200,
-    page: 2,
+    page: 15,
 
     order: '',
     signin: '',
