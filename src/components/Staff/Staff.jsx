@@ -11,8 +11,8 @@ const Staff = (props) => {
     let pagesCount = Math.ceil(props.count / props.page);
     let pages = [];
 
-    let maxLeft = (props.currentPage - Math.floor(5/props.page));
-    let maxRight = (props.currentPage + Math.floor(5/props.page));
+    let maxLeft = (props.currentPage - Math.floor(5 / 2));
+    let maxRight = (props.currentPage + Math.floor( 5 / 2));
 
     if (maxLeft < 1) {
         maxLeft = 1;
