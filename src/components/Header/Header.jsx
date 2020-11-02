@@ -30,6 +30,11 @@ const styles = {
     
 }
 const Header = (props) => {
+    
+    if (!props.user) {
+        return <div></div>
+    }
+   
     const { classes } = props;
     return (
         <div >
@@ -40,9 +45,9 @@ const Header = (props) => {
                     <Tabs />
                     
                     <div className = {classes.textLogin}>
-                        <span className = {classes.name}> Kazhymukhan Yerkinov </span> <br/>
+                        <span className = {classes.name}> {props.user.full_name}</span> <br/>
                         
-                        <span className = {classes.role}> admin </span>
+                        <span className = {classes.role}> {props.user.level} </span>
                     </div>
 
                     

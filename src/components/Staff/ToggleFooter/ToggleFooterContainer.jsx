@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ToggleFooter from './ToggleFooter';
-import { setToggleHeight, createStaffThunk, updateStaffThunk } from '../../../redux/staff-reducer';
+import { setToggleHeight, createStaffThunk, updateStaffThunk, setEditorBtn } from '../../../redux/staff-reducer';
 
 
 
@@ -12,24 +12,28 @@ const ToggleFooterContainer = (props) => {
                          createStaffThunk = {props.createStaffThunk}
                          updateStaffThunk = {props.updateStaffThunk}
 
+
                          initialValues = {props.initialValues}
                          editorBtn = {props.editorBtn}
                          height = {props.height}
 
+
                          currentPage = {props.currentPage}
                          page = {props.page }
                          order = {props.order}
-                         signin = {props.signin}
+                         signin = {props.sign}
+
                          />
 }
 
 let mapStateToProps = (state) => {
     return {
+
         height: state.staffPage.height,
         currentPage: state.staffPage.currentPage,
-        order: state.staffPage.order,
-        signin: state.staffPage.signin,
         page: state.staffPage.page,
+        editorBtn: state.staffPage.editorBtn,
+
         initialValues: {
             code: state.staffPage.detailStaff.code,
             full_name: state.staffPage.detailStaff.full_name,
@@ -45,4 +49,5 @@ export default connect(mapStateToProps, {
     setToggleHeight,
     createStaffThunk,
     updateStaffThunk,
+    setEditorBtn,
 })(ToggleFooterContainer);

@@ -1,0 +1,17 @@
+.app-request {
+    margin: 2% 2% 0 2%; 
+    min-width: 98%;
+    border: 1px solid  #7E98AE;
+    font-family: SFUIDisplay;
+    font-size: 14px;
+}
+.app-request-table-th {
+    border-left: 1px solid #7E98AE;
+}
+
+.fa-check {
+    color: green;
+}
+.fa-times {
+    color:  #D42D11;
+}

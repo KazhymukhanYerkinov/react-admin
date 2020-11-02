@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link ,Button} from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import './NavbarModule.css';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       
     },
     links:{
-        margin:20
+        margin: 15
     },
     span:{
         color: '#8AA1C1', 
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     // иконка и текст администрация 
     bottom_admin:{
         marginTop:20,
+        marginLeft: 15,
         width:'100%'
     },
     admin_text:{
@@ -40,37 +41,14 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const Navbar = (props) => {
+const Navbar = () => {
 
-
-    const handleClick = () => {
-        props.setDetailStaff({});
-        props.setToggleHeight(250);
-        props.setEditorBtn(false);
-    }
+    
     
     const styles = useStyles();
     return(
         <div className = {styles.links}>
-            <div>
-                <Link component = "button">
-                &#62;&#62; 
-                </Link>
-                
-                <Link component = "button" className = {styles.navlink}>
-                    Главная  
-                </Link>
-
-                <span className = {styles.span}>/</span>
-
-                <Link component = "button" className = {styles.navlink}>
-                    Администрация  
-                </Link>
-                <span className = {styles.span}>/</span>
-                <Link component = "button" className = {styles.navlink}>
-                    Настройки  
-                </Link>
-            </div>
+            
 
             <div className = {styles.bottom_admin}>
                 <Box display="flex" >
@@ -90,33 +68,28 @@ const Navbar = (props) => {
                     
                     </Box>
                     
-                    <Box>
-                    <Button variant="contained" color="primary"
-                    aria-controls='example-panel'
-                    onClick = { handleClick }>
-                        add new staff
-                    </Button>
-                    </Box>
+                    
                 </Box>
                     
             </div>
 
-            <div className = "mt-3 w-100   bottom-nav">
+            <div className = "mt-3 ml-3 w-100  bottom-nav">
                 <ul className="nav nav-pills">
                     <li className="nav-item">
-                        <NavLink className="nav-link" to = {'/'}>Сотрудники</NavLink>
+                        <NavLink className="nav-link" to = {'/staffs'}>Сотрудники</NavLink>
                     </li>
-                    {/* <li className="nav-item">
-                        <NavLink className="nav-link " to = {'/location'}>Местоположение</NavLink>
+                    <li className="nav-item ml-3">
+                        <NavLink className="nav-link " to = {'/request'}> Запросы </NavLink>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item ml-3">
                         <NavLink className="nav-link" to = {'/filial'}>Филиалы</NavLink>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item ml-3">
                         <NavLink className="nav-link" to = {'/card'}>Карточка</NavLink>
-                    </li> */}
+                    </li>
                 </ul>
+
             </div>
            
         </div>

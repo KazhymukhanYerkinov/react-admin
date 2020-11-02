@@ -21,3 +21,18 @@
     border: 1px solid black;
     
 }
+.app-toggle-error {
+    color: red;
+    margin-left: 2%;
+    vertical-align: middle;
+}
+
+.app-toogle-div-error {
+    width: 40%;
+    border: 1px solid red;
+    border-radius: 10%;
+    
+}
+.fa-ban {
+    color: red !important;
+}

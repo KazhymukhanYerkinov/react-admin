@@ -1,36 +1,24 @@
-import React from 'react';
-
+import React, { useCallback }  from 'react';
 import './StaffModule.css';
 import ToggleFooterContainer from './ToggleFooter/ToggleFooterContainer';
+import StaffItem from './StaffItem/StaffItem';
+import Pagination from './Pagination/Pagination';
+import { Box ,Button} from '@material-ui/core';
+import Preloader from '../../common/Preloader/Preloader';
+
 
 let order = '';
 let sign = '';
 
 const Staff = (props) => {
-    //////////// PAGINATION LOGIC //////////////////
-    let pagesCount = Math.ceil(props.count / props.page);
-    let pages = [];
 
-    let maxLeft = (props.currentPage - Math.floor(5 / 2));
-    let maxRight = (props.currentPage + Math.floor( 5 / 2));
-
-    if (maxLeft < 1) {
-        maxLeft = 1;
-        maxRight = 5;
+    
+    const handleClick = () => {
+        props.setDetailStaff({});
+        props.setToggleHeight(250);
+        props.setEditorBtn(false);
     }
-    if (maxRight > pagesCount) {
-        maxLeft = pagesCount - (5 - 1);
-
-        if (maxLeft < 1) {
-            maxLeft = 1;
-        }
-        maxRight = pagesCount
-    }
-
-    for (let i = maxLeft; i <= maxRight; i++) {
-        pages.push(i);
-    }
-
+    
 
     ///////////// PAGINATION AND SORT  /////////////////////////
     const handleCode = (e) => {
@@ -49,36 +37,42 @@ const Staff = (props) => {
                 }
             }
         }
-        order = e.currentTarget.getAttribute('name');
-        sign = e.currentTarget.classList.contains('fa-angle-up')? '' : '-';
+        order = (e.currentTarget.getAttribute('name'));
+        sign = (e.currentTarget.classList.contains('fa-angle-up')? '' : '-');
 
-        props.setSignInStaff(sign);
-        props.setOrderStaff(order);
 
         
         props.getStaffThunk(props.currentPage, props.page, order, sign);
     }
+    
 
-    //////////////////  DELETE BUTTON /////////////////////////////
-    const handleDelete = (code, currentPage) => {
-        if (props.count > props.page) {
-            const temp = props.count % props.page;
-            if (temp == 1) {
-                props.setCurrentPage(1)
-                props.deleteStaffThunk(code, currentPage - 1, props.page, order, sign)
-            }
-            else {
-                props.deleteStaffThunk(code, currentPage, props.page, order, sign)
-            }
-        }
-        else {
-            props.deleteStaffThunk(code, currentPage, props.page,  order, sign)
-        }
-    }
+    ////////////////////  STAFF ITEMS ///////////////////////////////////
+    const staffItem = useCallback(props.staffs.map(  staff => <StaffItem code = {staff.code} 
+                                                         full_name = {staff.full_name}
+                                                         position = {staff.position}
+                                                         phone = {staff.phone}
+                                                         email = {staff.email}
+                                                         setEditorBtn = {props.setEditorBtn}
+                                                         setToggleHeight = {props.setToggleHeight}
+                                                         getDetailStaffThunk = {props.getDetailStaffThunk}
+                                                         deleteStaffThunk = {props.deleteStaffThunk}
+                                                         setCurrentPage = { props.setCurrentPage }
+                                                         currentPage = { props.currentPage }
+                                                         order = { order }
+                                                         sign = { sign }
+                                                         page = { props.page }
+                                                         count = { props.count }
+                                                         isFetching = {props.isFetching} />), [props.staffs]);
 
     return (
-        <>
+        <>   
+        <div className = 'd-flex flex-row-reverse bd-highlight'>
+            <Box>
+                <Button variant="contained" color="primary" aria-controls='example-panel' onClick = { handleClick }> Добавить нового сотрудника </Button>
+            </Box>
+        </div>      
         <div className = 'app-staff'>
+        
             <table class="table table-striped">
                 <thead className = 'app-staff-table-tr'>
                     <tr >
@@ -119,60 +113,30 @@ const Staff = (props) => {
                             <th className = 'app-staff-table-th'></th>
                             <th></th>
                     </tr>
+                    
+                    
                 </thead>
                 <tbody>
-                    {props.staffs.map(s => {
-                        return (
-                                <tr>
-                                    <td scope="row"> {s.code} </td>
-                                    <td> {s.full_name} </td>
-                                    <td> {s.position} </td>
-                                    <td> {s.phone} </td>
-                                    <td> {s.email}</td>
-                                    <td> <i class="material-icons" onClick = { () => {props.setEditorBtn(true)
-                                                                                      props.setToggleHeight(250)
-                                                                                      props.getDetailStaffThunk(s.code)}}> mode_edit </i> </td>
-                                    <td> <i class="material-icons app-staff-delete" onClick = { () => { handleDelete(s.code, props.currentPage)}}>delete</i> </td>
-                                </tr>
-                                );
-                    })}
+
+                    {props.isFetching ? <tr><td colspan="7" className = 'app-staff-preloader'> <Preloader /> </td></tr> : staffItem}
+
                 </tbody>
-            </table>
+                </table>
+           
             <div>
-                <ToggleFooterContainer setEditorBtn = {props.setEditorBtn}
-                                       editorBtn = {props.editorBtn}/>
+                <ToggleFooterContainer order = { order } sign = { sign } />
             </div>
 
            
         </div>
-
-        <nav className = 'ml-5'>
-            <ul className = 'pagination justify-content-end'>
-                <li class="page-item" onClick = { () => {props.setCurrentPage(1)
-                                                        props.getStaffThunk(1, props.page, order, sign) }}>
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo; ПЕРВАЯ </span>
-                    </a>
-                </li>
-
-                {pages.map(p => {
-                    return <li className={`page-item ${props.currentPage === p && 'active'}`} onClick = { () => {props.setCurrentPage(p) 
-                                                                                                                 props.getStaffThunk(p, props.page, order, sign)}}>
-                                <a class="page-link" href="#">  {p} </a>
-                           </li>
-                })}
-                
-               
-                <li class="page-item" onClick = { () => {props.setCurrentPage(pagesCount) 
-                                                         props.getStaffThunk(pagesCount, props.page, order, sign)}}>
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">ПОСЛЕДНЯЯ &raquo;</span>
-                </a>
-                </li>
-            </ul>
-        </nav>
+        <Pagination order = { order } sign = { sign } page = { props.page } count = { props.count }
+                    currentPage = { props.currentPage } setCurrentPage = { props.setCurrentPage } getStaffThunk = { props.getStaffThunk } />
         </>
     );
 }
+const areEquals = (prevProps, nextProps) => {
+    return prevProps.staffs === nextProps.staffs && prevProps.isFetching === nextProps.isFetching
+}
 
-export default Staff;
+export default React.memo(Staff, areEquals);
+

@@ -1,0 +1,18 @@
+.metaError {
+    color: red;
+    margin-left: 1%;
+}
+.loginError {
+    color: red;
+    margin-top: 2%;
+    font-size: 12px;
+
+}
+
+.formControl.error input,
+.formControl.error select {
+    border: 2px red solid;
+}
+.fullWidth {
+    width: 100%;
+}

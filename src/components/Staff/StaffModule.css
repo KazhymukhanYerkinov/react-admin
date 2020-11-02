@@ -23,7 +23,7 @@
 .app-staff {
     font-family: SFUIDisplay;
     font-size: 14px;
-    margin: 2% 2% 0 2%; 
+    margin: 1% 2% 0 2%; 
     overflow-y: auto;
     height: 55vh;
     min-width: 98%;
@@ -33,6 +33,10 @@
     position: sticky;
     top: -0.5px;
     
+}
+.app-staff-preloader{
+    background-color: white;
+    border: 1px solid white;
 }
 th {
     background-color: white;

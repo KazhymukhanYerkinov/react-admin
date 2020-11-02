@@ -1,48 +1,47 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import NavbarContainer from './components/Navbar/NavbarContainer';
-import StaffContainer from './components/Staff/StaffContainer';
 import { Route } from 'react-router-dom';
-import LocationContainer from './components/Location/LocationContainer';
+import { connect } from 'react-redux';
+
+import Auth from './Auth';
+import SignContainer from './components/Signin/SignContainer';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+
+import Layout from './hoc/Layout';
+import { initalizeApp } from './redux/app-reducer';
+import SignUpContainer from './components/SignUp/SignUpContainer';
 
 
 
 
-const useStyles = makeStyles((theme) => ({
-  sidebar: {
-    background: '#F5F7FA',
-    height: '91vh',
-    maxWidth: '80px',
+
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initalizeApp();
   }
-}));
 
-const App = () => {
-  const classes = useStyles();
-  return (
-    <Grid container spacing={0}>
-      <Grid item xs={12}>
-        <Header />
-      </Grid>
+  
 
-      <Grid item xs={3} sm={1} className = {classes.sidebar}>
-        
-      </Grid>
+  render() {
+    if (!this.props.initialized) {
+      return <div> </div>
+    }
 
-      <Grid item xs={9} sm={11} >
- 
-          <NavbarContainer/>
-            <Route exact path = '/location'
-                  render = { () => <LocationContainer /> }/>
-
-            <Route exact path = '/'
-                  render = { () =>  <StaffContainer /> }/>
-         
-        
-      </Grid>
-    </Grid>
-  );
+    return (
+      <Layout>
+        <Route exact path = '/login'
+          render = { () =>  <SignContainer /> }/>
+        <Route exact path = '/register' 
+          render = { () => <SignUpContainer /> } />
+        <Route exact path = '/forgot'
+          render = { () => <ForgotPassword /> } />
+        <Auth />
+      </Layout>
+    )
+  }
 }
-export default App;
+
+const mapStateToProps = (state) => ({ initialized: state.appPage.initialized })
+
+
+export default connect(mapStateToProps, { initalizeApp })(App);
 
