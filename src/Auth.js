@@ -9,18 +9,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import HeaderContainer from './components/Header/HeaderContainer';
 import RequestContainer from './components/Request/RequestContainer';
 import Navbar from './components/Navbar/Navbar';
+import Project from './components/Project/Project';
 
 
-const useStyles = makeStyles((theme) => ({
-    sidebar: {
-      background: '#F5F7FA',
-      height: '91vh',
-      maxWidth: '80px',
-    }
-  }));
 
-const Auth = (props) => {
-    const classes = useStyles();
+
+const Auth = () => {
     
     return (
         <Grid container spacing={0}>
@@ -28,11 +22,9 @@ const Auth = (props) => {
             <HeaderContainer />
           </Grid>
 
-          <Grid item xs={3} sm={1} className = {classes.sidebar}>
           
-          </Grid>
 
-          <Grid item xs={9} sm={11} >
+          <Grid item xs={12} sm={12} className = 'pl-4 pr-4'>
   
             <Navbar/>
 
@@ -40,6 +32,8 @@ const Auth = (props) => {
                   render = { () =>  <StaffContainer /> }/>
             <Route path = '/request'
                   render = { () => <RequestContainer />}/>
+            <Route path = '/project'
+                  render = { () => <Project /> } />
               
           </Grid>
         </Grid>

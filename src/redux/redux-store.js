@@ -5,6 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth-reducer';
 import appReducer from './app-reducer';
 import requestReducer from './request-reducer';
+import projectReducer from './project-reducer';
 
 
 
@@ -13,6 +14,7 @@ let reducers = combineReducers({
     authPage: authReducer,
     appPage: appReducer,
     requestPage: requestReducer,
+    projectPage: projectReducer,
     form: formReducer,
 });
 

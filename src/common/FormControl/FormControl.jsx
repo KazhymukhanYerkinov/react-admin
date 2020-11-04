@@ -24,8 +24,8 @@ export const FormSelectControl = ({input, meta, children}) => {
     return (
         <div className = {cls.formControl + " " + (hasError ? cls.error: "")}>
             <div>
-                <select {...input} className = 'form-control'>
-                    { children }
+                <select {...input} >
+                    { children }            
                 </select>
             </div>
 

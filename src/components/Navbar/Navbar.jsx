@@ -9,7 +9,7 @@ import './NavbarModule.css';
 const useStyles = makeStyles((theme) => ({
     navlink: {
       marginLeft:7,
-      marginRight:7,
+      marginRight:5,
       fontFamily: 'SFUIDisplay',
       fontSize: '11px',
       color: '#8AA1C1',
@@ -82,7 +82,7 @@ const Navbar = () => {
                         <NavLink className="nav-link " to = {'/request'}> Запросы </NavLink>
                     </li>
                     <li className="nav-item ml-3">
-                        <NavLink className="nav-link" to = {'/filial'}>Филиалы</NavLink>
+                        <NavLink className="nav-link" to = {'/project'}> Проекты </NavLink>
                     </li>
 
                     <li className="nav-item ml-3">
