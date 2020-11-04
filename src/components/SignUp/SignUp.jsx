@@ -109,7 +109,7 @@ const SuccessSignUp = (props) => {
         </Typography>
 
         <Typography variant="body1">
-            Sen success register jasadin jane almaz mal ekenin bildin, Eger almaz mal dep iwinnen 3 ret aitsan super admin seni kabildaidi  
+            Welcome to Kazhymukhan's admin
         </Typography>  
 
         <Typography variant = "body1">

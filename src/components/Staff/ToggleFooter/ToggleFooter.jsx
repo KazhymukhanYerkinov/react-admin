@@ -139,4 +139,4 @@ const areEquals = (prevProps, nextProps) => {
     return prevProps.editorBtn === nextProps.editorBtn && prevProps.height === nextProps.height && prevProps.initialValues === nextProps.initialValues
 }
 
-export default React.memo(ToggleFooter, areEquals);
+export default ToggleFooter;
